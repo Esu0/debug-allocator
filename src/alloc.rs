@@ -13,6 +13,9 @@ pub struct Action {
     pub kind: Kind,
 }
 
+unsafe impl Send for Action {}
+unsafe impl Sync for Action {}
+
 fn fmt_layout(f: &mut fmt::Formatter<'_>, layout: Layout) -> fmt::Result {
     write!(
         f,
