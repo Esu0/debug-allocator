@@ -6,7 +6,7 @@ use std::{
     sync::{Arc, RwLock, RwLockReadGuard},
 };
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub struct Action {
     pub addr: Option<NonNull<()>>,
     pub layout: Layout,
@@ -58,7 +58,7 @@ impl Display for Action {
     }
 }
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum Kind {
     Allocate,
     Deallocate,
@@ -68,7 +68,7 @@ pub enum Kind {
     Shrink(Layout),
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct DebugAlloc<A> {
     alloc: A,
     history: Arc<RwLock<VecDeque<Action>>>,
